@@ -27,3 +27,10 @@ SELECT claim_type, COUNT(*) AS claim_count
 FROM practice_claims
 GROUP BY claim_type
 ORDER BY claim_count DESC;
+
+-- 5. MINUS query -- records in source missing from staging
+-- Most important reconciliation query in ETL testing
+SELECT claim_id FROM practice_claims
+MINUS
+SELECT claim_id FROM practice_claims_staging;
+-- If any rows returned = data loss = High defect
